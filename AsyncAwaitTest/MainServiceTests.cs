@@ -20,9 +20,9 @@ namespace AsyncProgrammingTest
 		public async Task HotTasksAreCompleted()
 		{
 			var cancellationTokenSource = new CancellationTokenSource();
-			var task1 = _mainService.HotTask1(cancellationTokenSource);
-			var task2 = _mainService.HotTask2(cancellationTokenSource);
-			var task3 = _mainService.HotTask3(cancellationTokenSource);
+			var task1 = _mainService.Task1(cancellationTokenSource);
+			var task2 = _mainService.Task2(cancellationTokenSource);
+			var task3 = _mainService.Task3(cancellationTokenSource);
 
 			await Task.WhenAll(task1, task2, task3);
 
@@ -35,9 +35,9 @@ namespace AsyncProgrammingTest
 		public async Task HotTasksAreInterrupted()
 		{
 			var cancellationTokenSource = new CancellationTokenSource();
-			var task1 = _mainService.HotTask1(cancellationTokenSource);
-			var task2 = _mainService.HotTask2(cancellationTokenSource);
-			var task3 = _mainService.HotTask3(cancellationTokenSource);
+			var task1 = _mainService.Task1(cancellationTokenSource);
+			var task2 = _mainService.Task2(cancellationTokenSource);
+			var task3 = _mainService.Task3(cancellationTokenSource);
 			cancellationTokenSource.CancelAfter(3000);
 
 			await Task.WhenAll(task1, task2, task3).ContinueWith(t =>

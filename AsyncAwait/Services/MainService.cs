@@ -6,7 +6,7 @@ namespace AsyncProgramming.Services
 {
 	public class MainService
 	{
-		public Task HotTask1(CancellationTokenSource cancellationTokenSource)
+		public Task Task1(CancellationTokenSource cancellationTokenSource)
 		{
 			return Task.Run(async () =>
 			{
@@ -17,7 +17,7 @@ namespace AsyncProgramming.Services
 			});
 		}
 
-		public Task HotTask2(CancellationTokenSource cancellationTokenSource)
+		public Task Task2(CancellationTokenSource cancellationTokenSource)
 		{
 			return Task.Run(async () =>
 			{
@@ -28,7 +28,7 @@ namespace AsyncProgramming.Services
 			});
 		}
 
-		public Task HotTask3(CancellationTokenSource cancellationTokenSource)
+		public Task Task3(CancellationTokenSource cancellationTokenSource)
 		{
 			return Task.Run(async () =>
 			{
@@ -45,10 +45,7 @@ namespace AsyncProgramming.Services
 
 			Task.Run(async () =>
 			{
-				if (cancellationTokenSource == null)
-					throw new ArgumentNullException(nameof(cancellationTokenSource));
-
-				await Task.Delay(1000, cancellationTokenSource.Token);
+				await Task1(cancellationTokenSource);
 				tcs.SetResult(true);
 			});
 
@@ -61,10 +58,7 @@ namespace AsyncProgramming.Services
 
 			Task.Run(async () =>
 			{
-				if (cancellationTokenSource == null)
-					throw new ArgumentNullException(nameof(cancellationTokenSource));
-
-				await Task.Delay(2000, cancellationTokenSource.Token);
+				await Task2(cancellationTokenSource);
 				tcs.SetResult(true);
 			});
 
@@ -77,10 +71,7 @@ namespace AsyncProgramming.Services
 
 			Task.Run(async () =>
 			{
-				if (cancellationTokenSource == null)
-					throw new ArgumentNullException(nameof(cancellationTokenSource));
-
-				await Task.Delay(5000, cancellationTokenSource.Token);
+				await Task3(cancellationTokenSource);
 				tcs.SetResult(true);
 			});
 
@@ -91,10 +82,7 @@ namespace AsyncProgramming.Services
 		{
 			return Task.Run(() =>
 			{
-				if (cancellationTokenSource == null)
-					throw new ArgumentNullException(nameof(cancellationTokenSource));
-
-				Task.Delay(1000, cancellationTokenSource.Token).Wait();
+				Task1(cancellationTokenSource).Wait();
 				return true;
 			});
 		}
