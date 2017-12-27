@@ -6,7 +6,7 @@ namespace AsyncProgramming.Services
 {
 	public class MainService
 	{
-		public Task Task1(CancellationTokenSource cancellationTokenSource)
+		public Task<int> Task1(CancellationTokenSource cancellationTokenSource)
 		{
 			return Task.Run(async () =>
 			{
@@ -14,10 +14,11 @@ namespace AsyncProgramming.Services
 					throw new ArgumentNullException(nameof(cancellationTokenSource));
 
 				await Task.Delay(1000, cancellationTokenSource.Token);
+				return Thread.CurrentThread.ManagedThreadId;
 			});
 		}
 
-		public Task Task2(CancellationTokenSource cancellationTokenSource)
+		public Task<int> Task2(CancellationTokenSource cancellationTokenSource)
 		{
 			return Task.Run(async () =>
 			{
@@ -25,10 +26,11 @@ namespace AsyncProgramming.Services
 					throw new ArgumentNullException(nameof(cancellationTokenSource));
 
 				await Task.Delay(2000, cancellationTokenSource.Token);
+				return Thread.CurrentThread.ManagedThreadId;
 			});
 		}
 
-		public Task Task3(CancellationTokenSource cancellationTokenSource)
+		public Task<int> Task3(CancellationTokenSource cancellationTokenSource)
 		{
 			return Task.Run(async () =>
 			{
@@ -36,17 +38,18 @@ namespace AsyncProgramming.Services
 					throw new ArgumentNullException(nameof(cancellationTokenSource));
 
 				await Task.Delay(5000, cancellationTokenSource.Token);
+				return Thread.CurrentThread.ManagedThreadId;
 			});
 		}
 
 		public Task TaskCompletitionSource1(CancellationTokenSource cancellationTokenSource)
 		{
-			var tcs = new TaskCompletionSource<bool>();
+			var tcs = new TaskCompletionSource<int>();
 
 			Task.Run(async () =>
 			{
-				await Task1(cancellationTokenSource);
-				tcs.SetResult(true);
+				var threadId = await Task1(cancellationTokenSource);
+				tcs.SetResult(threadId);
 			});
 
 			return tcs.Task;
@@ -54,12 +57,12 @@ namespace AsyncProgramming.Services
 
 		public Task TaskCompletitionSource2(CancellationTokenSource cancellationTokenSource)
 		{
-			var tcs = new TaskCompletionSource<bool>();
+			var tcs = new TaskCompletionSource<int>();
 
 			Task.Run(async () =>
 			{
-				await Task2(cancellationTokenSource);
-				tcs.SetResult(true);
+				var threadId = await Task2(cancellationTokenSource);
+				tcs.SetResult(threadId);
 			});
 
 			return tcs.Task;
@@ -67,12 +70,12 @@ namespace AsyncProgramming.Services
 
 		public Task TaskCompletitionSource3(CancellationTokenSource cancellationTokenSource)
 		{
-			var tcs = new TaskCompletionSource<bool>();
+			var tcs = new TaskCompletionSource<int>();
 
 			Task.Run(async () =>
 			{
-				await Task3(cancellationTokenSource);
-				tcs.SetResult(true);
+				var threadId = await Task3(cancellationTokenSource);
+				tcs.SetResult(threadId);
 			});
 
 			return tcs.Task;
