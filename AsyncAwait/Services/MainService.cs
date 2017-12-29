@@ -80,14 +80,5 @@ namespace AsyncProgramming.Services
 
 			return tcs.Task;
 		}
-
-		public Task<bool> TaskWait(CancellationTokenSource cancellationTokenSource)
-		{
-			return Task.Run(() =>
-			{
-				Task1(cancellationTokenSource).Wait();
-				return true;
-			});
-		}
 	}
 }

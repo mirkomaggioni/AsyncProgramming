@@ -48,17 +48,6 @@ namespace AsyncProgrammingTest
 		}
 
 		[Test]
-		public void TaskWaitIsCompleted()
-		{
-			var cancellationTokenSource = new CancellationTokenSource();
-			var task1 = _mainService.TaskWait(cancellationTokenSource);
-			var result = task1.Result;
-
-			Assert.That(task1.IsCompleted);
-			Assert.That(result);
-		}
-
-		[Test]
 		public async Task TaskCompletitionSourceAreCompleted()
 		{
 			var cancellationTokenSource = new CancellationTokenSource();

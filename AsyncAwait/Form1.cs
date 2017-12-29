@@ -46,13 +46,5 @@ namespace AsyncProgramming
 
 			MessageBox.Show(@"End!");
 		}
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-			var cancellationTokenSource = new CancellationTokenSource();
-			var task1 = _mainService.TaskWait(cancellationTokenSource);
-			var result = task1.Result;
-			MessageBox.Show(@"End!");
-		}
 	}
 }
