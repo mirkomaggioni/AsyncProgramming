@@ -42,7 +42,7 @@ namespace AsyncProgramming.Services
 			});
 		}
 
-		public Task TaskCompletitionSource1(CancellationTokenSource cancellationTokenSource)
+		public Task<int> TaskCompletitionSource1(CancellationTokenSource cancellationTokenSource)
 		{
 			var tcs = new TaskCompletionSource<int>();
 
@@ -55,7 +55,7 @@ namespace AsyncProgramming.Services
 			return tcs.Task;
 		}
 
-		public Task TaskCompletitionSource2(CancellationTokenSource cancellationTokenSource)
+		public Task<int> TaskCompletitionSource2(CancellationTokenSource cancellationTokenSource)
 		{
 			var tcs = new TaskCompletionSource<int>();
 
@@ -68,7 +68,7 @@ namespace AsyncProgramming.Services
 			return tcs.Task;
 		}
 
-		public Task TaskCompletitionSource3(CancellationTokenSource cancellationTokenSource)
+		public Task<int> TaskCompletitionSource3(CancellationTokenSource cancellationTokenSource)
 		{
 			var tcs = new TaskCompletionSource<int>();
 

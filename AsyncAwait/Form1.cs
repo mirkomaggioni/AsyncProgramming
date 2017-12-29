@@ -24,7 +24,11 @@ namespace AsyncProgramming
 			var task2 = _mainService.Task2(cancellationTokenSource);
 			var task3 = _mainService.Task3(cancellationTokenSource);
 
-			await Task.WhenAll(task1, task2, task3);
+			textBox1.Text = Thread.CurrentThread.ManagedThreadId.ToString();
+			textBox2.Text = (await task1).ToString();
+			textBox3.Text = (await task2).ToString();
+			textBox4.Text = (await task3).ToString();
+
 			MessageBox.Show(@"End!");
 		}
 
@@ -35,7 +39,11 @@ namespace AsyncProgramming
 			var task2 = _mainService.TaskCompletitionSource2(cancellationTokenSource);
 			var task3 = _mainService.TaskCompletitionSource3(cancellationTokenSource);
 
-			await Task.WhenAll(task1, task2, task3);
+			textBox1.Text = Thread.CurrentThread.ManagedThreadId.ToString();
+			textBox2.Text = (await task1).ToString();
+			textBox3.Text = (await task2).ToString();
+			textBox4.Text = (await task3).ToString();
+
 			MessageBox.Show(@"End!");
 		}
 
