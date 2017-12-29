@@ -46,11 +46,11 @@ namespace AsyncProgramming.Services
 		{
 			var tcs = new TaskCompletionSource<int>();
 
+			int threadId = 0;
 			Task.Run(async () =>
 			{
-				var threadId = await Task1(cancellationTokenSource);
-				tcs.SetResult(threadId);
-			});
+				threadId = await Task1(cancellationTokenSource);
+			}).ContinueWith(t => tcs.SetResult(threadId), TaskContinuationOptions.OnlyOnRanToCompletion);
 
 			return tcs.Task;
 		}
@@ -59,11 +59,11 @@ namespace AsyncProgramming.Services
 		{
 			var tcs = new TaskCompletionSource<int>();
 
+			int threadId = 0;
 			Task.Run(async () =>
 			{
-				var threadId = await Task2(cancellationTokenSource);
-				tcs.SetResult(threadId);
-			});
+				threadId = await Task2(cancellationTokenSource);
+			}).ContinueWith(t => tcs.SetResult(threadId), TaskContinuationOptions.OnlyOnRanToCompletion);
 
 			return tcs.Task;
 		}
@@ -72,11 +72,11 @@ namespace AsyncProgramming.Services
 		{
 			var tcs = new TaskCompletionSource<int>();
 
+			int threadId = 0;
 			Task.Run(async () =>
 			{
-				var threadId = await Task3(cancellationTokenSource);
-				tcs.SetResult(threadId);
-			});
+				threadId = await Task3(cancellationTokenSource);
+			}).ContinueWith(t => tcs.SetResult(threadId), TaskContinuationOptions.OnlyOnRanToCompletion);
 
 			return tcs.Task;
 		}
